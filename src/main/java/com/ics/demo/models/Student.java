@@ -26,13 +26,19 @@ public class Student {
     @Column(name="dob")
     private String dob;
 
+    @ManyToOne
+    @JoinColumn(name = "university_id")
+
+    private University university;
+
     public Student() { }
 
-    public Student(String firstName, String lastName, String middleName, String dob) {
+    public Student(String firstName, String lastName, String middleName, String dob, University university) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.middleName = middleName;
         this.dob = dob;
+        this.university = university;
     }
 
     public long getId() {
@@ -73,6 +79,14 @@ public class Student {
 
     public void setDob(String dob) {
         this.dob = dob;
+    }
+
+    public University getUniversity() {
+        return university;
+    }
+
+    public void setUniversity(University university) {
+        this.university = university;
     }
 
     public interface Update{}

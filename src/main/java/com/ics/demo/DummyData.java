@@ -32,10 +32,10 @@ public class DummyData implements CommandLineRunner
         universityRepository.save(jkuat);
 
         //students
-        Student student1 = new Student("John","Doe","Martin","2000");
+        Student student1 = new Student("John","Doe","Martin","2000",jkuat);
         studentRepository.save(student1);
 
-        Student student2 = new Student("Jane","Doe","Rose","1999");
+        Student student2 = new Student("Jane","Doe","Rose","1999", strath);
         studentRepository.save(student2);
 
         //Rooms
@@ -45,11 +45,6 @@ public class DummyData implements CommandLineRunner
         Room room10 = new Room("Room 10","Phase1");
         roomRepository.save(room10);
 
-        Room zumaridi = new Room("Zumaridi","Sir Thomas More Building");
-        roomRepository.save(zumaridi);
-
-        Room f1 = new Room("F1","Sir Thomas More First Floor");
-        roomRepository.save(f1);
     }
 
 }
