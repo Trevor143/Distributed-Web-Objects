@@ -1,7 +1,11 @@
 package com.ics.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="students")
@@ -27,9 +31,12 @@ public class Student {
     private String dob;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "university_id")
-
     private University university;
+
+    @ManyToMany(mappedBy = "students")
+    private Set<Course> courses = new HashSet<>();
 
     public Student() { }
 
@@ -91,4 +98,14 @@ public class Student {
 
     public interface Update{}
     public interface Create {}
+
+    //getters and setters for courses
+
+    public Set<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
+    }
 }

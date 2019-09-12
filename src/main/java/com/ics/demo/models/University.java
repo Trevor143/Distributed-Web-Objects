@@ -1,7 +1,10 @@
 package com.ics.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name="universities")
@@ -22,6 +25,10 @@ public class University {
 
     @Column(name = "year_founded")
     private String yearFounded;
+
+    @OneToMany(mappedBy = "university")
+    //@JsonIgnore
+    private List<Student> students;
 
     public University() { }
 
@@ -60,6 +67,14 @@ public class University {
 
     public void setYearFounded(String yearFounded) {
         this.yearFounded = yearFounded;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 
     public interface Update{
