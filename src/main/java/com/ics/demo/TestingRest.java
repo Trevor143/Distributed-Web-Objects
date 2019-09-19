@@ -25,29 +25,38 @@ public class TestingRest implements CommandLineRunner {
     public void run(String... args) throws Exception {
         RestTemplate restTemplate = new RestTemplate();
 
-        String baseUrl = "http://10.51.10.111:9090/";
-        ResponseEntity<List<University>> response = restTemplate.exchange(
-                baseUrl+"universities",
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<List<University>>() {});
-        List<University> universities = response.getBody();
-        System.out.println("Response: "+universities.toString());
+//        String baseUrl = "http://10.51.10.111:9090/";
+//        ResponseEntity<List<University>> response = restTemplate.exchange(
+//                baseUrl+"universities",
+//                HttpMethod.GET,
+//                null,
+//                new ParameterizedTypeReference<List<University>>() {});
+//        List<University> universities = response.getBody();
+//        System.out.println("Response: "+universities.toString());
 
         // feign
-        universities = feignRestClient.getAllUniverisities();
+        List<University> universities = feignRestClient.getAllUniverisities();
         System.out.println("Feign Universities"+universities.toString());
 
-        University university = restTemplate.getForObject(
-                baseUrl+"universities/5",
-                University.class
-        );
 
-        String url = baseUrl+"universities/search?name="+university.getName();
+//        University university = restTemplate.getForObject(
+//                baseUrl+"universities/5",
+//                University.class
+//        );
+//
+//        String url = baseUrl+"universities/search?name="+university.getName();
+//
+//        University searched = restTemplate.getForObject(
+//                url,
+//                University.class
+//        );
 
-        University searched = restTemplate.getForObject(
-                url,
-                University.class
-        );
+        // post 1 uni using feign
+        University createdUniversity = feignRestClient.createUniversity(new University("Tujiangalie University","Africa"));
+        System.out.println("created university "+createdUniversity);
+
+        // find by id
+        University findUni = feignRestClient.findById(createdUniversity.getId());
+        System.out.println("Uni is "+findUni);
     }
 }

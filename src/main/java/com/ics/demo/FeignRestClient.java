@@ -3,6 +3,7 @@ package com.ics.demo;
 import com.ics.demo.models.University;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -18,4 +19,8 @@ public interface FeignRestClient {
     // single university
     @RequestMapping(method = RequestMethod.GET, value = "universities/{id}")
     University findById(@PathVariable(name = "id") long id);
+
+    // post 1 uni
+    @RequestMapping(method = RequestMethod.POST, value = "universities")
+    University createUniversity(@RequestBody University university);
 }
