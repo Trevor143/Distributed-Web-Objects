@@ -3,6 +3,9 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.7.RELEASE'
     id 'java'
 }
+ext {
+    set('springCloudVersion', "Greenwich.SR3")
+}
 
 group = 'com.ics'
 version = '0.0.1-SNAPSHOT'
@@ -18,4 +21,12 @@ dependencies {
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'mysql:mysql-connector-java'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation group: 'io.github.openfeign', name: 'feign-httpclient', version: '10.4.0'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }

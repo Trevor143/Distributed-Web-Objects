@@ -9,9 +9,11 @@ import com.ics.demo.repositories.RoomRepository;
 import com.ics.demo.repositories.StudentRepository;
 import com.ics.demo.repositories.UniversityRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.stereotype.Component;
 
 @Component
+@EnableFeignClients
 public class DummyData implements CommandLineRunner
 {
     private final UniversityRepository universityRepository;
@@ -49,13 +51,18 @@ public class DummyData implements CommandLineRunner
         Room room10 = new Room("Room 10","Phase1");
         roomRepository.save(room10);
 
+        //saved course
         //returned the saved course
         Course course = courseRepository.save(new Course("Distributed Objects"));
         course.addStudent(student1);
+        courseRepository.save(course);
 
         Course course1 = new Course("Web Security");
         Course savedCourse1 = courseRepository.save(course1);
         savedCourse1.addStudent(student2);
+        courseRepository.save(savedCourse1);
+
+
     }
 
 }
