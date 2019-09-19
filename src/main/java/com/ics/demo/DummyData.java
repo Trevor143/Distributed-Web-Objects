@@ -9,11 +9,9 @@ import com.ics.demo.repositories.RoomRepository;
 import com.ics.demo.repositories.StudentRepository;
 import com.ics.demo.repositories.UniversityRepository;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.stereotype.Component;
 
 @Component
-@EnableFeignClients
 public class DummyData implements CommandLineRunner
 {
     private final UniversityRepository universityRepository;
