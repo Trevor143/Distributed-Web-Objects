@@ -23,4 +23,8 @@ public interface FeignRestClient {
     // post 1 uni
     @RequestMapping(method = RequestMethod.POST, value = "universities")
     University createUniversity(@RequestBody University university);
+
+    // patch
+    @RequestMapping(method = RequestMethod.PATCH, value = "universities/{id}")
+    University update(@PathVariable(name = "id") long id, @RequestBody University university);
 }

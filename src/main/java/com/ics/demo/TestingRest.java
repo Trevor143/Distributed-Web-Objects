@@ -2,11 +2,7 @@ package com.ics.demo;
 
 import com.ics.demo.models.University;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -34,5 +30,9 @@ public class TestingRest implements CommandLineRunner {
         // find by id
         University findUni = feignRestClient.findById(createdUniversity.getId());
         System.out.println("Uni is "+findUni);
+
+        // update on server
+        createdUniversity.setLocation("Sauti sol");
+        University updatedUniversity = feignRestClient.update(createdUniversity.getId(),createdUniversity);
     }
 }
