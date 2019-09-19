@@ -14,9 +14,15 @@ import java.util.List;
 @Component
 public class TestingRest implements CommandLineRunner {
 
+    private final FeignRestClient feignRestClient;
+
+    public TestingRest(FeignRestClient feignRestClient) {
+        this.feignRestClient = feignRestClient;
+    }
+
+
     @Override
     public void run(String... args) throws Exception {
-        /*
         RestTemplate restTemplate = new RestTemplate();
 
         String baseUrl = "http://10.51.10.111:9090/";
@@ -28,6 +34,9 @@ public class TestingRest implements CommandLineRunner {
         List<University> universities = response.getBody();
         System.out.println("Response: "+universities.toString());
 
+        // feign
+        universities = feignRestClient.getAllUniverisities();
+        System.out.println("Feign Universities"+universities.toString());
 
         University university = restTemplate.getForObject(
                 baseUrl+"universities/5",
@@ -40,6 +49,5 @@ public class TestingRest implements CommandLineRunner {
                 url,
                 University.class
         );
-         */
     }
 }
